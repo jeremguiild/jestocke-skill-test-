@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from market_place.views import BoxesView,StorageBoxCreateView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('boxes', BoxesView.as_view(), name='boxes'),
+    path('boxes/add', StorageBoxCreateView.as_view(), name='create_storage_box'),
 ]

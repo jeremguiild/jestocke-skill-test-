@@ -14,6 +14,9 @@ class Profile(models.Model):
     date_of_birth = models.DateField(blank=True, null=True, verbose_name=_("Date of birth"))
     picture = models.ImageField(upload_to="profile_picture")
 
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
+
 
 class StorageBox(models.Model):
     id = models.AutoField(primary_key=True)
@@ -33,6 +36,6 @@ class StorageBox(models.Model):
     postal_code = models.CharField("postal code", max_length=32)
     city = models.CharField("city", max_length=32)
 
-    image_1 = models.ImageField(upload_to="box_picture")
-    image_2 = models.ImageField(upload_to="box_picture")
-    image_3 = models.ImageField(upload_to="box_picture")
+    image_1 = models.ImageField(upload_to="box_picture", blank=True, null=True)
+    image_2 = models.ImageField(upload_to="box_picture", blank=True, null=True)
+    image_3 = models.ImageField(upload_to="box_picture", blank=True, null=True)

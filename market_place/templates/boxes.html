@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Boxes</title>
+</head>
+<body>
+    <header>
+        <h1>Boxes</h1>
+    </header>
+    <main>
+        {% load djmoney %}
+        <a href="{% url 'create_storage_box' %}">Create New StorageBox</a>
+
+        <p>
+            Sort by:
+            <a class="btn btn-primary" href="?sort=price_asc">Price (Low to High)</a>
+            <a class="btn btn-primary" href="?sort=price_desc">Price (High to Low)</a>
+            <a class="btn btn-primary" href="?sort=surface_asc">Surface (Low to High)</a>
+            <a class="btn btn-primary" href="?sort=surface_desc">Surface (High to Low)</a>
+            <a class="btn btn-primary" href="?sort=address_asc">Address (Low to High)</a>
+            <a class="btn btn-primary" href="?sort=address_desc">Address (High to Low)</a>
+        </p>
+
+        {{ prices }}
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Surface (m²)</th>
+                    <th>Prix</th>
+                    <th>Propriétaire</th>
+                    <th>Localisation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for box in available_boxes %}
+
+                <tr>
+                    <td>{{ box.title }}</td>
+                    <td>{{ box.surface }}</td>
+                    <td>{{ box.price.amount }} {{ box.price.currency }}</td>
+                    <td>{{ box.owner.first_name }} {{ box.owner.last_name }}</td>
+                    <td>{{ box.street_number }} {{ box.route }} {% if box.additional_address %}{{ box.additional_address }}{% endif %} {{ box.postal_code }} {{ box.city }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </main>
+</body>
+</html>
